@@ -94,7 +94,7 @@ type_name:
     max_length: # warning and error
         warning: 40
         error: 50
-    excluded: iPhone # excluded via string
+    excluded: Key # excluded via string
 
 # Длина названий констант и переменных
 identifier_name:
