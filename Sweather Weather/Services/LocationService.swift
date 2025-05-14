@@ -80,8 +80,11 @@ final class LocationServiceImpl: NSObject, LocationService {
 extension LocationServiceImpl: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        authorizationContinuation?.resume(returning: manager.authorizationStatus)
-        authorizationContinuation = nil
+        let status = manager.authorizationStatus
+        if status != .notDetermined {
+            authorizationContinuation?.resume(returning: status)
+            authorizationContinuation = nil
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
