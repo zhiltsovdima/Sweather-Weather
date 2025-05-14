@@ -8,7 +8,8 @@
 import Foundation
 
 protocol WeatherService: AnyObject {
-    func getCurrentWeather(for location: UserLocation) async throws -> CurrentWeatherResponse
+    func fetchCurrentWeather(for location: UserLocation) async throws -> CurrentWeatherResponse
+    func fetchForecast(for location: UserLocation) async throws -> ForecastResponse
 }
 
 final class WeatherServiceImpl: WeatherService {
@@ -19,7 +20,7 @@ final class WeatherServiceImpl: WeatherService {
         self.networkClient = networkClient
     }
     
-    func getCurrentWeather(for location: UserLocation) async throws -> CurrentWeatherResponse {
+    func fetchCurrentWeather(for location: UserLocation) async throws -> CurrentWeatherResponse {
         let request = try WeatherAPI
             .getCurrent(location)
             .makeRequest()
