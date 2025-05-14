@@ -18,4 +18,5 @@ class DIContainer {
     private lazy var networkClient: NetworkClient = DefaultNetworkClient(provider: networkProvider)
     
     lazy var weatherService: WeatherService = WeatherServiceImpl(networkClient: networkClient)
+    let locationService: LocationService = LocationServiceImpl()
 }
