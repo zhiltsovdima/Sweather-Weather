@@ -90,7 +90,7 @@ weak_delegate: warning
 
 # Длина названий классов, структур, перечислений
 type_name:
-    min_length: 4 # only warning
+    min_length: 3 # only warning
     max_length: # warning and error
         warning: 40
         error: 50

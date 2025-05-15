@@ -19,4 +19,5 @@ class DIContainer {
     
     lazy var weatherService: WeatherService = WeatherServiceImpl(networkClient: networkClient)
     let locationService: LocationService = LocationServiceImpl()
+    let alertsFactory: AlertFactoryProtocol = AlertFactory()
 }

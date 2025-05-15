@@ -19,7 +19,8 @@ final class SceneFactoryImpl: SceneFactory {
             view: viewController,
             router: router,
             weatherService: DIContainer.shared.weatherService,
-            locationService: DIContainer.shared.locationService
+            locationService: DIContainer.shared.locationService,
+            alertFactory: DIContainer.shared.alertsFactory
         )
         viewController.presenter = presenter
         return viewController
