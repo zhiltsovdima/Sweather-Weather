@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherCell.swift
+//  HourlyForecastCell.swift
 //  Sweather Weather
 //
 //  Created by Dima Zhiltsov on 14.05.2025.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class CurrentWeatherCell: UITableViewCell {
+final class HourlyForecastCell: UITableViewCell {
     
-    private lazy var weatherView: CurrentWeatherView = {
-        let view = CurrentWeatherView()
+    private lazy var hourlyForecastView: HourlyForecastView = {
+        let view = HourlyForecastView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -29,14 +29,15 @@ final class CurrentWeatherCell: UITableViewCell {
     
     // MARK: - Setup
     private func setupViews() {
-        contentView.addSubview(weatherView)
+        contentView.addSubview(hourlyForecastView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            weatherView.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.maxWidth),
-            weatherView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            weatherView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            hourlyForecastView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.padding),
+            hourlyForecastView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hourlyForecastView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            hourlyForecastView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.padding)
         ])
     }
     
@@ -47,16 +48,15 @@ final class CurrentWeatherCell: UITableViewCell {
 }
 
 // MARK: - Public methods
-extension CurrentWeatherCell {
-    func configure(with model: CurrentWeatherModel?) {
-        weatherView.update(with: model)
+extension HourlyForecastCell {
+    func configure(with model: [ForecastDayModel.Hour]) {
+        hourlyForecastView.update(with: model)
     }
 }
 
 // MARK: - Constants
-extension CurrentWeatherCell {
+extension HourlyForecastCell {
     private enum Constants {
-        static let padding: CGFloat = 16
-        static let maxWidth: CGFloat = 400
+        static let padding: CGFloat = 8
     }
 }

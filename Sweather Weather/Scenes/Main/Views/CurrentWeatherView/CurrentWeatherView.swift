@@ -7,27 +7,6 @@
 
 import UIKit
 
-struct CurrentWeatherModel {
-    let city: String
-    let temperature: Double
-    let condition: String
-    let iconName: String
-    
-    init(city: String, temperature: Double, condition: String, iconName: String) {
-        self.city = city
-        self.temperature = temperature
-        self.condition = condition
-        self.iconName = iconName
-    }
-    
-    init(from response: CurrentWeatherResponse) {
-        self.city = response.cityName
-        self.temperature = response.temperature
-        self.condition = response.condition
-        self.iconName = ""
-    }
-}
-
 final class CurrentWeatherView: UIView {
     
     private lazy var stackView: UIStackView = {
@@ -50,6 +29,7 @@ final class CurrentWeatherView: UIView {
     
     private lazy var weatherIconImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.tintColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -114,12 +94,12 @@ final class CurrentWeatherView: UIView {
 // MARK: - Public methods
 extension CurrentWeatherView {
     
-    func update(with weather: CurrentWeatherModel?) {
-        guard let weather else { return }
-        cityLabel.text = weather.city
-        weatherIconImageView.image = UIImage(named: weather.iconName)
-        temperatureLabel.text = String(format: "%.0f°C", weather.temperature)
-        conditionLabel.text = weather.condition
+    func update(with model: CurrentWeatherModel?) {
+        guard let model else { return }
+        cityLabel.text = model.city
+        weatherIconImageView.image = UIImage(systemName: model.condition.iconName)
+        temperatureLabel.text = model.temperatureCelciusString
+        conditionLabel.text = model.condition.text
     }
     
 }
