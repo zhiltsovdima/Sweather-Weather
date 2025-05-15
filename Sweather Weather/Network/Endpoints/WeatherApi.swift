@@ -34,7 +34,8 @@ enum WeatherAPI: Endpoint {
         case .getForecast(let location):
             return [
                 URLQueryItem(name: "q", value: location.requestForm),
-                URLQueryItem(name: Key.userID, value: PrivateKeys.weatherApiKey)
+                URLQueryItem(name: Key.userID, value: PrivateKeys.weatherApiKey),
+                URLQueryItem(name: Key.days, value: "\(Constants.daysCount)")
             ]
         }
     }
@@ -64,5 +65,10 @@ extension WeatherAPI {
     /// При добавлении sensitive ключа, обязательно добавить исключение в NetworkLogger
     enum Key {
         static let userID = "key"
+        static let days = "days"
+    }
+    
+    enum Constants {
+        static let daysCount = 7
     }
 }

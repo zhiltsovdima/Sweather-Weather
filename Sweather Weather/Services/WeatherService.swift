@@ -27,4 +27,12 @@ final class WeatherServiceImpl: WeatherService {
         let requestCofig = RequestConfig(request: request)
         return try await networkClient.fetch(requestCofig, with: JSONResponseHandler())
     }
+    
+    func fetchForecast(for location: UserLocation) async throws -> ForecastResponse {
+        let request = try WeatherAPI
+            .getForecast(location)
+            .makeRequest()
+        let requestConfig = RequestConfig(request: request)
+        return try await networkClient.fetch(requestConfig, with: JSONResponseHandler())
+    }
 }
